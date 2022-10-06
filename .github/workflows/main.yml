@@ -1,17 +1,21 @@
 name: Deploy to GitHub Pages
 
+
 # Run workflow on every push to the master branch
 on:
   push:
     branches: [ master ]
-
+permissions:
+  contents: write
+  
 jobs:
   deploy-to-github-pages:
     # use ubuntu-latest image to run steps on
     runs-on: ubuntu-latest
     steps:
     
-    #install dot net version
+      #install dot net version
+      - name: Checkout
       - uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
