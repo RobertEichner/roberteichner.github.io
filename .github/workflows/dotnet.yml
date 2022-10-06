@@ -1,0 +1,36 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        
+        
+    - name: Test
+      run: dotnet test
+      
+    - name: Publish
+      run: dotnet publish myapp.csproj --configuration Release
+      
+    - name: GitHub Pages action
+      if: ${{ github.ref == 'refs/heads/master' }} # Publish only when the push is on master
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.PUBLISH_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: bin/Release/netstandard2.1/publish/wwwroot
+        allow_empty_commit: false
+        keep_files: false
+        force_orphan: true
