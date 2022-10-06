@@ -19,10 +19,10 @@ jobs:
         
         
     - name: Test
-      run: dotnet test
+      run: dotnet BlazorWebsite/test
       
     - name: Publish
-      run: dotnet publish myapp.csproj --configuration Release
+      run: dotnet publish BlazorWebsite/BlazorWebsite.csproj --configuration Release
       
     - name: GitHub Pages action
       if: ${{ github.ref == 'refs/heads/master' }} # Publish only when the push is on master
