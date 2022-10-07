@@ -16,21 +16,13 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-        
-        
-    - name: Test
-      run: dotnet BlazorWebsite/test
-      
-    - name: Publish
-      run: dotnet publish BlazorWebsite/BlazorWebsite.csproj --configuration Release
-      
-    - name: GitHub Pages action
-      if: ${{ github.ref == 'refs/heads/master' }} # Publish only when the push is on master
-      uses: peaceiris/actions-gh-pages@v3.6.1
+            
+    - name: Publish with dotnet
+      run: dotnet publish --configuration Release --output build
+    - name: Deploy to Github Pages
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        github_token: ${{ secrets.PUBLISH_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: bin/Release/netstandard2.1/publish/wwwroot
-        allow_empty_commit: false
-        keep_files: false
-        force_orphan: true
+        ACCESS_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+        BASE_BRANCH: development # The branch the action should deploy from.
+        BRANCH: master # The branch the action should deploy to.
+        FOLDER: build/wwwroot # The folder the action should deploy.
