@@ -18,6 +18,7 @@ jobs:
         dotnet-version: 6.0.x
             
     - name: Publish with dotnet
+      working-directory: ./BlazorWebsite
       run: dotnet publish --configuration Release --output build
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
