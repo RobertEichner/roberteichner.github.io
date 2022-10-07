@@ -20,6 +20,11 @@ jobs:
     - name: Publish with dotnet
       working-directory: ./BlazorWebsite
       run: dotnet publish --configuration Release --output build
+      
+    # changes the base-tag in index.html to match GitHub Pages repository subdirectory
+    - name: Change base-tag in index.html from / to BlazorWebsite
+      run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorWebsite\/" \/>/g' release/wwwroot/index.html
+      
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
