@@ -23,7 +23,8 @@ jobs:
       
     # changes the base-tag in index.html to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to BlazorWebsite
-      run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorWebsite\/" \/>/g' ./BlazorWebsite/release/wwwroot/index.html
+      working-directory: ./BlazorWebsite
+      run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorWebsite\/" \/>/g' build/wwwroot/index.html
       
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v4
