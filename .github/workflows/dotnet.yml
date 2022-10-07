@@ -23,6 +23,6 @@ jobs:
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
-        ACCESS_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: ./BlazorWebsite/build/wwwroot # The folder the action should deploy.
+        token: ${{ secrets.PUBLISH_TOKEN }}
+        branch: gh-pages # The branch the action should deploy to.
+        folder: ./BlazorWebsite/build/wwwroot # The folder the action should deploy.
